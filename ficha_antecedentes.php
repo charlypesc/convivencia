@@ -52,6 +52,11 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
     </tr>
     <tr>
       
+      <td>Apellidos</td>
+      <td><input class="form-control form-control-sm" name="nombre" type="text" placeholder="" value="<?php echo $apellidos;?>" readonly></td>
+    </tr>
+    <tr>
+      
       <td>Rut</td>
       <td><input id="rut" class="form-control form-control-sm" name="rut" type="text" placeholder="" value="<?php echo $rut?>" readonly></td>
     </tr>
@@ -128,7 +133,7 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
                   </tr>
                   <tr>
                       <td>Fecha</td>
-                      <td><input id="form_fecha" name="fecha_ingreso" class="form-control form-control-sm" type="text" placeholder="" value=""></td>
+                      <td><input id="form_fecha" name="fecha_ingreso" class="form-control form-control-sm" type="date" placeholder="" value=""></td>
                   </tr>
                   <tr>
                       <td>Procedimiento</td>
