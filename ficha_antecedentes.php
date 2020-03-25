@@ -143,7 +143,7 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
                   <tr>
                       <td>Registro:</td>
                       <td>
-                          <textarea name="registro" class="form-control" id="form_registro" rows="10" cols="30"></textarea>
+                          <textarea name="content" id="form_registro"></textarea>
                       </td>
                       <input id="proceso" type="hidden" name="proceso" value="Registra">
                       <input id="actualizaId" type="hidden" name="actualizaId" value="">
@@ -221,9 +221,9 @@ if($consulta_sql->num_rows>=1){
                 <p>Procedimiento:</p>
                 <p class="ml-1" id="procedimiento'.$id.'">'.$procedimiento.'</p>
             </div>
-            <div class="d-flex">
-                <p  class="mr-1">Registro:<br></p>
-                <p id="registro'.$id.'">'.$registro.'</p>
+            <div class="d-flex flex-column">
+                <div  class="mr-2 ">Registro:</div>
+                <div id="registro'.$id.'" class="border rounded p-3">'.$registro.'</div>
             </div>
             <div class="mb-3">
               <button type="button" id="actualiza" onclick="actualiza('.$id.');"  data-toggle="modal" data-target=".bd-example-modal-xl" class="btn btn-success">Actualizar</button>
@@ -239,7 +239,15 @@ if($consulta_sql->num_rows>=1){
 }
 ?>
 <script src="js/convivencia.js"></script> 
- 
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#form_registro' ),{
+            toolbar:['heading','|','bold','italic','bulletedList','numberedList','blockQuote','undo','redo']
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+</script> 
 </div>
 
 </body>
