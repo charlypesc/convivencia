@@ -109,6 +109,8 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
                                   <option selected>Elegir...</option>
                                   
                                   <?php 
+
+                                  //solamente carga desde la BBDD el Nombre despues a traves de una llamada AJAX se realizara la nueva busqueda en la BBDD
                                     foreach ($interviene_sql->fetch_all(MYSQLI_ASSOC) as $key) {
     
                                       $interviene=$key['nombre'];
@@ -180,7 +182,7 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
 <!-- <button type="button" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Exportar fichas</button> -->
 </form>
 
-<div id="mostrar_antecedentes"  >
+<div id="mostrar_antecedentes">
 
 <?php
 
@@ -240,13 +242,7 @@ if($consulta_sql->num_rows>=1){
 ?>
 <script src="js/convivencia.js"></script> 
 <script>
-    ClassicEditor
-        .create( document.querySelector( '#form_registro' ),{
-            toolbar:['heading','|','bold','italic','bulletedList','numberedList','blockQuote','undo','redo']
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
+  
 </script> 
 </div>
 
