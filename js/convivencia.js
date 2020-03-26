@@ -163,6 +163,7 @@ function borra(id){
           $('.modal-backdrop').removeClass('modal-backdrop');
           $('body').removeClass('modal-open');
           $("#mostrar_antecedentes").html(datosFicha);
+          location.reload();
           // return false;
         
       }
