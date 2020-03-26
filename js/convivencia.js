@@ -1,9 +1,37 @@
+
+
+
+//Aplica un recargar pagina para limpiar de errores
+var eClose = document.getElementsByClassName("close");
+
+var myFun = function() {
+  // alert("hola");
+  location.reload();
+  return false;
+}
+for (var i = 0; i < eClose.length; i++) {
+  eClose[i].addEventListener('click', myFun, false);
+}
+
+
 function registra(){
     id=null;
     var procesoRegistra="Registra";
     document.getElementById("proceso").value=procesoRegistra;
     document.getElementById("form_ficha").reset();
     document.getElementById("actualizaId").value=id;
+
+    ClassicEditor
+        .create( document.querySelector( '#form_registro' ),{
+            toolbar:['heading','|','bold','italic','bulletedList','numberedList','undo','redo']
+        } )
+        
+        .catch( error => {
+            console.error( error );
+        } );
+
+
+
 
     $(function (){
       $("#form_ficha").submit(function(){
@@ -24,6 +52,7 @@ function registra(){
                 $('.modal-backdrop').removeClass('modal-backdrop');
                 $('body').removeClass('modal-open');
                 $("#mostrar_antecedentes").html(datosFicha);
+                location.reload();
             }
   
           })
@@ -65,7 +94,7 @@ function actualiza(id){
 
         ClassicEditor
         .create( document.querySelector( '#form_registro' ),{
-            toolbar:['heading','|','bold','italic','bulletedList','numberedList','blockQuote','undo','redo']
+            toolbar:['heading','|','bold','italic','bulletedList','numberedList','undo','redo']
         } )
         .then(editor => {
           console.log(editor);
@@ -96,6 +125,7 @@ function actualiza(id){
                       $('.modal-backdrop').removeClass('modal-backdrop');
                       $('body').removeClass('modal-open');
                       $("#mostrar_antecedentes").html(datosFicha);
+                      location.reload();
                   }
         
                 })
