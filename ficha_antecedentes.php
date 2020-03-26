@@ -88,6 +88,11 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
       <button type="button" onclick="registra();" class="btn btn-primary mr-3" data-toggle="modal" data-target=".bd-example-modal-xl" ><i class="fas fa-file"></i> Ingresar Nuevo Antecedente</button>
 </div>
 
+
+<!-- inicio de modal -->
+
+
+
 <div id="myModal" class="modal fade bd-example-modal-xl show" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
   
@@ -105,8 +110,8 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
                       <td>Interviene:</td>
                       <td>
                           <div class="form-group d-flex">
-                              <select id="inputOption" class="form-control" name="interviene">
-                                  <option selected>Elegir...</option>
+                              <select id="inputOption" class="form-control" name="interviene" required>
+                                  <option selected></option>
                                   
                                   <?php 
 
@@ -131,15 +136,15 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
                           </script>   
                   <tr>
                       <td>Cargo</td>
-                      <td><input id="select_option" name="cargo" class="form-control form-control-sm" type="text" placeholder="" value=""readonly></td>
+                      <td><input id="select_option" name="cargo" class="form-control form-control-sm" type="text" placeholder="" value=""readonly required></td>
                   </tr>
                   <tr>
                       <td>Fecha</td>
-                      <td><input id="form_fecha" name="fecha_ingreso" class="form-control form-control-sm" type="date" placeholder="" value=""></td>
+                      <td><input id="form_fecha" name="fecha_ingreso" class="form-control form-control-sm" type="date" placeholder="" value="" required></td>
                   </tr>
                   <tr>
                       <td>Procedimiento</td>
-                      <td><input id="form_proce" name="procedimiento" class="form-control form-control-sm" type="text" placeholder="" value=""></td>
+                      <td><input id="form_proce" name="procedimiento" class="form-control form-control-sm" type="text" placeholder="" value="" required></td>
                   </tr>
                   
                   <tr>
@@ -201,31 +206,33 @@ if($consulta_sql->num_rows>=1){
         
         echo '
         
-         <div class="container mt-3 border rounded">
-            <div class="mt-2">
-            <p><i class="fas fa-file-invoice"></i> '.$i.'</p>
-              <input type="hidden" id="id'.$id.'" value="'.$id.'">
-              <input type="hidden" id="cargo'.$id.'" value="'.$cargo.'">
-            </div>
-            <div class="d-flex">
+         <div class="container p-4 mt-3 border rounded ">
+            <div class="row mb-1">
+              <div class= "d-flex col-4 border">
+                <p> '.$i.'</p>
+                <p class="" id="fecha'.$id.'"> | Fecha: '.$fecha_antecedente.'</p>
+                <input type="hidden" id="id'.$id.'" value="'.$id.'">
+                <input type="hidden" id="cargo'.$id.'" value="'.$cargo.'">
+              </div>
+              <div class="col-4 border d-flex">
                 <p>Interviene :</p>
                 <p class="ml-1"id=interviene'.$id.'>'.$interviene.'</p>
-            </div>
-            <div class="d-flex">
+              </div>
+              <div class="col-4  border d-flex">
                 <p>Estudiante :</p>
                 <p class="ml-1">'.$nombres.' '.$apellidos.'</p>
+              </div>
             </div>
-            <div class="d-flex">
-                <p>Fecha:</p>
-                <p class="ml-1" id="fecha'.$id.'">'.$fecha_antecedente.'</p>
-            </div>
-            <div class="d-flex">
+            <div class="row">
+              <div class=" col-12 border d-flex">
                 <p>Procedimiento:</p>
                 <p class="ml-1" id="procedimiento'.$id.'">'.$procedimiento.'</p>
+              </div>
             </div>
             <div class="d-flex flex-column">
-                <div  class="mr-2 ">Registro:</div>
-                <div id="registro'.$id.'" class="border rounded p-3">'.$registro.'</div>
+
+                
+                <div id="registro'.$id.'" class="border rounded p-3 mt-3 mb-3">'.$registro.'</div>
             </div>
             <div class="mb-3">
               <button type="button" id="actualiza" onclick="actualiza('.$id.');"  data-toggle="modal" data-target=".bd-example-modal-xl" class="btn btn-success">Actualizar</button>
@@ -241,9 +248,7 @@ if($consulta_sql->num_rows>=1){
 }
 ?>
 <script src="js/convivencia.js"></script> 
-<script>
-  
-</script> 
+
 </div>
 
 </body>
