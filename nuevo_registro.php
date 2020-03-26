@@ -13,7 +13,7 @@ $interviene         =$_POST['interviene'];
 $cargo              =$_POST['cargo'];
 $fecha_ingreso      =$_POST['fecha_ingreso'];
 $procedimiento      =$_POST['procedimiento'];
-$registro           =$_POST['registro'];
+$registro           =$_POST['content'];
 $update_id          =$_POST['actualizaId'];
     
 $db_insertar_ant = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
