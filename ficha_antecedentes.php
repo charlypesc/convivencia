@@ -103,13 +103,15 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-      <div class="container mt-3 ml-3 mb-3">
-        <table class="table table-bordeless container">
-          <tbody>
-                  <tr>
-                      <td>Interviene:</td>
-                      <td>
-                          <div class="form-group d-flex">
+      <div class="container mt-3 mb-3">
+        <div class="row">
+          <div class="col-2 mt-1">Fecha</div>
+          <div class="col-10"><input id="form_fecha" name="fecha_ingreso" class="form-control form-control-sm" type="date" placeholder="" value="" required></div>
+        </div>
+        <div class="row mt-2">
+          <div class="mt-1 col-2">Interviene</div>
+          
+            <div class="col-10">
                               <select id="inputOption" class="form-control" name="interviene" required>
                                   <option selected></option>
                                   
@@ -128,54 +130,34 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
                                   ?>
 
                               </select>
-                          </div>
-                      </td>
-                  </tr>
-                          <script type="text/javascript">
-
-                          </script>   
-                  <tr>
-                      <td>Cargo</td>
-                      <td><input id="select_option" name="cargo" class="form-control form-control-sm" type="text" placeholder="" value=""readonly required></td>
-                  </tr>
-                  <tr>
-                      <td>Fecha</td>
-                      <td><input id="form_fecha" name="fecha_ingreso" class="form-control form-control-sm" type="date" placeholder="" value="" required></td>
-                  </tr>
-                  <tr>
-                      <td>Procedimiento</td>
-                      <td><input id="form_proce" name="procedimiento" class="form-control form-control-sm" type="text" placeholder="" value="" required></td>
-                  </tr>
-                  
-                  <tr>
-                      <td>Registro:</td>
-                      <td>
-                          <textarea name="content" id="form_registro"></textarea>
-                      </td>
-                      <input id="proceso" type="hidden" name="proceso" value="Registra">
-                      <input id="actualizaId" type="hidden" name="actualizaId" value="">
-                  </tr>
-                  <!-- <tr>
-                  <td>
-                  <div class="form-group">
-                      <label for="exampleFormControlFile1">Example file input</label>
-                      <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                  </div>
-                  
-                  </td>
-                  
-                  </tr> -->
-                  
-                  <tr>
-                    <td>
-                      <button id="btn-modal" type="submit" class="btn btn-success">Ingresar</button> 
-                               
-                    </td>
-                    <td></td>   
-                  </tr>
-
-              </tbody>
-            </table>
+              </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-2 mt-1">Cargo</div>
+          <div class="col-10">
+            <input id="select_option" name="cargo" class="form-control" type="text" placeholder="" value=""readonly required>
+          </div>
+        </div>
+        <div class="row mt-2">   
+          <div class="col-3 col-sm-3 col-md-3 col-lg-2 mt-1">Procedimiento</div>
+          <div class="col-9 col-sm-9 col-md-9 col-lg-10">
+            <input id="form_proce" name="procedimiento" class="form-control form-control-sm" type="text" placeholder="" value="" required>
+          </div>
+          </div>
+          <div class="d-flex justify-content-center row mt-4 flex-wrap">
+            <div class="col-11">
+              <h3 class="mt-2 mb-4">Registro de procedimiento realizado:</h3>
+              <textarea name="content" id="form_registro"></textarea>
+              <input id="proceso" type="hidden" name="proceso" value="Registra">
+              <input id="actualizaId" type="hidden" name="actualizaId" value="">
+            </div>
+          </div>                               
+        </div>
+        <div class="row justify-content-center mt-2">
+          <div class="col-2"><button id="btn-modal" type="submit" class="btn btn-success">Ingresar</button> </div>
+        </div>
+          
+         
       </div>
     </div>
   </div>
@@ -207,32 +189,32 @@ if($consulta_sql->num_rows>=1){
         echo '
         
          <div class="container p-4 mt-3 border rounded ">
+            <div class="row">
+              <div class="col-12"><p> Registro numero: '.$i.'</p></div></div>
             <div class="row mb-1">
-              <div class= "d-flex col-4 border">
-                <p> '.$i.'</p>
-                <p class="" id="fecha'.$id.'"> | Fecha: '.$fecha_antecedente.'</p>
+              <div class= "d-flex col-4 border border-primary rounded ">
+                <p class="" id="fecha'.$id.'">Fecha: '.$fecha_antecedente.'</p>
                 <input type="hidden" id="id'.$id.'" value="'.$id.'">
                 <input type="hidden" id="cargo'.$id.'" value="'.$cargo.'">
               </div>
-              <div class="col-4 border d-flex">
+              <div class="col-4 border border-warning rounded d-flex">
                 <p>Interviene :</p>
                 <p class="ml-1"id=interviene'.$id.'>'.$interviene.'</p>
               </div>
-              <div class="col-4  border d-flex">
+              <div class="col-4  border rounded border-danger d-flex">
                 <p>Estudiante :</p>
                 <p class="ml-1">'.$nombres.' '.$apellidos.'</p>
               </div>
             </div>
             <div class="row">
-              <div class=" col-12 border d-flex">
-                <p>Procedimiento:</p>
+              <div class="col-12  d-flex">
+                <p>Tipo de procedimiento:</p>
                 <p class="ml-1" id="procedimiento'.$id.'">'.$procedimiento.'</p>
               </div>
             </div>
-            <div class="d-flex flex-column">
-
-                
-                <div id="registro'.$id.'" class="border rounded p-3 mt-3 mb-3">'.$registro.'</div>
+            <div class="row">
+            <h3 class="mt-2 mb-2">Registro de procedimiento:</h3>
+              <div id="registro'.$id.'" class="col-12 d-flex flex-column border border-success rounded mt-3 mb-3 pt-2 ">'.$registro.'</div>
             </div>
             <div class="mb-3">
               <button type="button" id="actualiza" onclick="actualiza('.$id.');"  data-toggle="modal" data-target=".bd-example-modal-xl" class="btn btn-success">Actualizar</button>
