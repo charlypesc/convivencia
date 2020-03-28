@@ -53,7 +53,7 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
     <tr>
       
       <td>Apellidos</td>
-      <td><input class="form-control form-control-sm" name="nombre" type="text" placeholder="" value="<?php echo $apellidos;?>" readonly></td>
+      <td><input class="form-control form-control-sm" name="apellidos" type="text" placeholder="" value="<?php echo $apellidos;?>" readonly></td>
     </tr>
     <tr>
       
@@ -151,9 +151,17 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
               <input id="proceso" type="hidden" name="proceso" value="Registra">
               <input id="actualizaId" type="hidden" name="actualizaId" value="">
             </div>
-          </div>                               
+          </div>
+          <div class="d-flex justify-content-center row mt-4 flex-wrap">
+            <div class="col-11">
+              <h3 class="mt-2 mb-4">Acuerdo realizado:</h3>
+              <textarea name="content_acuerdo" id="form_acuerdo"></textarea>
+              <input id="proceso" type="hidden" name="proceso" value="Registra">
+              <input id="actualizaId" type="hidden" name="actualizaId" value="">
+            </div>
+          </div>                                  
         </div>
-        <div class="row justify-content-center mt-2">
+        <div class="row justify-content-center mt-2 mb-4">
           <div class="col-2"><button id="btn-modal" type="submit" class="btn btn-success">Ingresar</button> </div>
         </div>
           
@@ -184,6 +192,7 @@ if($consulta_sql->num_rows>=1){
         $fecha_antecedente  = $key['fecha'];
         $procedimiento      = $key['procedimiento'];
         $registro           = $key['registro'];
+        $acuerdo            = $key['acuerdo'];
         $cargo              = $key['cargo'];
         
         echo '
@@ -193,7 +202,7 @@ if($consulta_sql->num_rows>=1){
               <div class="col-12"><p> Registro numero: '.$i.'</p></div></div>
             <div class="row mb-1">
               <div class= "d-flex col-4 border border-primary rounded ">
-                <p class="" id="fecha'.$id.'">Fecha: '.$fecha_antecedente.'</p>
+                <p class="" id="fecha'.$id.'">'.$fecha_antecedente.'</p>
                 <input type="hidden" id="id'.$id.'" value="'.$id.'">
                 <input type="hidden" id="cargo'.$id.'" value="'.$cargo.'">
               </div>
@@ -213,13 +222,23 @@ if($consulta_sql->num_rows>=1){
               </div>
             </div>
             <div class="row">
-            <h3 class="mt-2 mb-2">Registro de procedimiento:</h3>
-              <div id="registro'.$id.'" class="col-12 d-flex flex-column border border-success rounded mt-3 mb-3 pt-2 ">'.$registro.'</div>
+              <h3 class="mt-2 mb-2">Registro de Antecedentes:</h3>
+              <div id="registro'.$id.'" class="col-12 d-flex flex-column border  rounded mt-3 mb-3 pt-2 ">'.$registro.'</div>
             </div>
-            <div class="mb-3">
-              <button type="button" id="actualiza" onclick="actualiza('.$id.');"  data-toggle="modal" data-target=".bd-example-modal-xl" class="btn btn-success">Actualizar</button>
+            <div class="row">
+              <h3 class="mt-2 mb-2">Acuerdos:</h3>
+              <div id="acuerdo'.$id.'" class="col-12 d-flex flex-column border  rounded mt-3 mb-3 pt-2 ">'.$acuerdo.'</div>
+            </div>
+            <div class="row">
+              <h4>Archivos adjuntos</h4>
+              <div class="col-12"></div>
+              
+            </div>
+            
+            <div class="row mb-3">
+              <button type="button" id="actualiza" onclick="actualiza('.$id.');"  data-toggle="modal" data-target=".bd-example-modal-xl" class="btn btn-success mr-2">Actualizar</button>
               <button type="button" id="borrar" onClick="borra('.$id.');" class="btn btn-danger">Borrar</button>
-              </div>   
+            </div>   
             
          </div>
                       ';

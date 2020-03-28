@@ -30,7 +30,13 @@ function registra(){
             console.error( error );
         } );
 
-
+        ClassicEditor
+        .create( document.querySelector( '#form_acuerdo' ),{
+            toolbar:['heading','|','bold','italic','bulletedList','numberedList','undo','redo']
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
 
 
     $(function (){
@@ -65,33 +71,34 @@ function registra(){
 
 
 function actualiza(id){
-        
+  
         // creacion de variables con id distintivos
         var fechaFull   ='fecha'+id;
         var procedimientoFull='procedimiento'+id;
         var intervieneFull='interviene'+id;
         var cargoFull='cargo'+id;
         var registroFull='registro'+id;
+        var acuerdoFull='acuerdo'+id;
         // se captura la info de cada elemento del informe
-        var fecha=document.getElementById(fechaFull).innerText;
+        var fecha=document.getElementById(fechaFull).innerHTML;
         var procedimiento=document.getElementById(procedimientoFull).innerText;
         var interviene=document.getElementById(intervieneFull).innerText;
         var cargo=document.getElementById(cargoFull).value;
         var registro=document.getElementById(registroFull).innerHTML;
-        console.log(registro);
+        var acuerdo=document.getElementById(acuerdoFull).innerHTML;
+        console.log(acuerdoFull);
         var proceso="Actualiza";    
 
         //se trasvasija la info en la vista modal
-
+        
         document.getElementById("form_fecha").value=fecha;      
         document.getElementById("form_proce").value=procedimiento;  
         document.getElementById("inputOption").value=interviene;
         document.getElementById("select_option").value=cargo;
-        // x=document.getElementById("form_registro").innerHTML=registro;
         document.getElementById("btn-modal").innerText=("Actualizar");
         document.getElementById("proceso").value=proceso;
         document.getElementById("actualizaId").value=id;
-
+         //paso de datos al editor registro
         ClassicEditor
         .create( document.querySelector( '#form_registro' ),{
             toolbar:['heading','|','bold','italic','bulletedList','numberedList','undo','redo']
@@ -103,8 +110,18 @@ function actualiza(id){
         .catch( error => {
             console.error( error );
         } );
-
-      
+        //paso de datos al editor acuerdo
+        ClassicEditor
+        .create( document.querySelector( '#form_acuerdo' ),{
+            toolbar:['heading','|','bold','italic','bulletedList','numberedList','undo','redo']
+        } )
+        .then(editora => {
+          console.log(editora);
+          editora.setData(acuerdo); 
+        })
+        .catch( error => {
+            console.error( error );
+        } );
       
             $("#form_ficha").submit(function(){
                 var datoForm=$(this).serialize();

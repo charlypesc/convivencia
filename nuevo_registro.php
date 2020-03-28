@@ -3,6 +3,7 @@ include('clases/cn.php');
 // print_r($_POST);
 $id                 =$_POST['actualizaId'];
 $nombre             =$_POST['nombre'];
+$apellidos          =$_POST['apellidos'];
 $proceso            =$_POST['proceso']; 
 $rut                =$_POST['rut'];
 $curso              =$_POST['curso'];
@@ -14,6 +15,7 @@ $cargo              =$_POST['cargo'];
 $fecha_ingreso      =$_POST['fecha_ingreso'];
 $procedimiento      =$_POST['procedimiento'];
 $registro           =$_POST['content'];
+$acuerdo            =$_POST['content_acuerdo'];
 $update_id          =$_POST['actualizaId'];
     
 $db_insertar_ant = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -22,10 +24,10 @@ $db_insertar_ant->set_charset('utf8');
 
 switch($proceso){
     case 'Registra':
-        $insertar_sql=$db_insertar_ant->query("INSERT INTO `ficha_antecedentes` (`id`, `nombres`, `apellidos`, `rut`, `curso`, `nacimiento`, `apoderado`, `direccion`, `interviene`, `cargo`, `fecha`, `procedimiento`, `registro`, `adjuntos`) VALUES (NULL, '$nombre', null, '$rut', '$curso', '$nacimiento', '$apoderado', '$direccion', '$interviene', '$cargo', '$fecha_ingreso', '$procedimiento', '$registro', NULL);");
+        $insertar_sql=$db_insertar_ant->query("INSERT INTO `ficha_antecedentes` (`id`, `nombres`, `apellidos`, `rut`, `curso`, `nacimiento`, `apoderado`, `direccion`, `interviene`, `cargo`, `fecha`, `procedimiento`, `registro`, `acuerdo`, `adjuntos`) VALUES (NULL, '$nombre', '$apellidos', '$rut', '$curso', '$nacimiento', '$apoderado', '$direccion', '$interviene', '$cargo', '$fecha_ingreso', '$procedimiento', '$registro','$acuerdo', NULL);");
     break;
     case 'Actualiza':
-        $insertar_sql=$db_insertar_ant->query("UPDATE `ficha_antecedentes` SET  `id`='$id', `nombres`='$nombre', `apellidos`='', `rut`='$rut', `curso`='$curso', `nacimiento`='$nacimiento', `apoderado`='$apoderado', `direccion`='$direccion', `interviene`='$interviene', `cargo`='$cargo', `fecha`='$fecha_ingreso', `procedimiento`='$procedimiento', `registro`='$registro', `adjuntos`='' WHERE  `ficha_antecedentes`.`id` = '$update_id'");
+        $insertar_sql=$db_insertar_ant->query("UPDATE `ficha_antecedentes` SET  `id`='$id', `nombres`='$nombre', `apellidos`='$apellidos', `rut`='$rut', `curso`='$curso', `nacimiento`='$nacimiento', `apoderado`='$apoderado', `direccion`='$direccion', `interviene`='$interviene', `cargo`='$cargo', `fecha`='$fecha_ingreso', `procedimiento`='$procedimiento', `registro`='$registro',`acuerdo`='$acuerdo', `adjuntos`='' WHERE  `ficha_antecedentes`.`id` = '$update_id'");
     break;
 
 }
