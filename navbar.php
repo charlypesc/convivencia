@@ -7,10 +7,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link text-white" href="#"><i class="fas fa-home mr-1"></i>Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link text-white" href="index.php"><i class="fas fa-home mr-1"></i>Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link text-white" href="consultar.php"><i class="fas fa-search mr-1"></i>Consultar</i></a> 
+        <a class="nav-link text-white" href="index.php"><i class="fas fa-search mr-1"></i>Consultar</i></a> 
         
       </li>
       <li class="nav-item">
