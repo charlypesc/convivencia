@@ -148,18 +148,16 @@ $consulta_sql=$db_search_id->query("SELECT * FROM `ficha_antecedentes` WHERE `ru
             <div class="col-11">
               <h3 class="mt-2 mb-4">Registro de procedimiento realizado:</h3>
               <textarea name="content" id="form_registro"></textarea>
-              <input id="proceso" type="hidden" name="proceso" value="Registra">
-              <input id="actualizaId" type="hidden" name="actualizaId" value="">
             </div>
           </div>
           <div class="d-flex justify-content-center row mt-4 flex-wrap">
             <div class="col-11">
               <h3 class="mt-2 mb-4">Acuerdo realizado:</h3>
               <textarea name="content_acuerdo" id="form_acuerdo"></textarea>
-              <input id="proceso" type="hidden" name="proceso" value="Registra">
               <input id="actualizaId" type="hidden" name="actualizaId" value="">
             </div>
-          </div>                                  
+          </div>
+          <input id="proceso" type="hidden" name="proceso" value="Registra">                                  
         </div>
         <div class="row justify-content-center mt-2 mb-4">
           <div class="col-2"><button id="btn-modal" type="submit" class="btn btn-success">Ingresar</button> </div>
@@ -194,53 +192,54 @@ if($consulta_sql->num_rows>=1){
         $registro           = $key['registro'];
         $acuerdo            = $key['acuerdo'];
         $cargo              = $key['cargo'];
-        
+        $date='2020';
+        // print_r($year);
         echo '
         
-         <div class="container p-4 mt-3 border rounded ">
+        <br><br><div class="container p-4 mt-3 border rounded ">
             <div class="row">
-              <div class="col-12"><p> Registro numero: '.$i.'</p></div></div>
+              
+              <div class="col-8  border d-flex">
+                <p>Antecedente:</p>
+                <p class="ml-1" id="procedimiento'.$id.'">'.$procedimiento.'</p>
+              </div>
+              <div class="col-4 border">
+                <p class="ml-1"> Folio: '.$rut.''.$date.'-'.$id.'</p>
+              </div>
+            </div>
             <div class="row mb-1">
-              <div class= "d-flex col-4 border border-primary rounded ">
+              <div class= "d-flex col-4 border ">
                 <p class="" id="fecha'.$id.'">'.$fecha_antecedente.'</p>
                 <input type="hidden" id="id'.$id.'" value="'.$id.'">
                 <input type="hidden" id="cargo'.$id.'" value="'.$cargo.'">
               </div>
-              <div class="col-4 border border-warning rounded d-flex">
+              <div class="col-4 border  d-flex">
                 <p>Interviene :</p>
                 <p class="ml-1"id=interviene'.$id.'>'.$interviene.'</p>
               </div>
-              <div class="col-4  border rounded border-danger d-flex">
+              <div class="col-4  border d-flex">
                 <p>Estudiante :</p>
                 <p class="ml-1">'.$nombres.' '.$apellidos.'</p>
               </div>
             </div>
             <div class="row">
-              <div class="col-12  d-flex">
-                <p>Tipo de procedimiento:</p>
-                <p class="ml-1" id="procedimiento'.$id.'">'.$procedimiento.'</p>
-              </div>
-            </div>
-            <div class="row">
-              <h3 class="mt-2 mb-2">Registro de Antecedentes:</h3>
-              <div id="registro'.$id.'" class="col-12 d-flex flex-column border  rounded mt-3 mb-3 pt-2 ">'.$registro.'</div>
-            </div>
-            <div class="row">
-              <h3 class="mt-2 mb-2">Acuerdos:</h3>
-              <div id="acuerdo'.$id.'" class="col-12 d-flex flex-column border  rounded mt-3 mb-3 pt-2 ">'.$acuerdo.'</div>
-            </div>
-            <div class="row">
-              <h4>Archivos adjuntos</h4>
-              <div class="col-12"></div>
               
+            </div>
+            <div class="row">
+              <h6 class="mt-2 mb-2">Registro de Antecedentes:</h6>
+              <div id="registro'.$id.'" class="col-12 d-flex flex-column  mt-3 mb-3 pt-2 ">'.$registro.'</div>
+            </div>
+            <div class="row">
+              <h6 class="mt-2 mb-2">Acuerdos:</h6>
+              <div id="acuerdo'.$id.'" class="col-12 d-flex flex-column border  rounded mt-3 mb-3 pt-2 ">'.$acuerdo.'</div>
             </div>
             
             <div class="row mb-3">
               <button type="button" id="actualiza" onclick="actualiza('.$id.');"  data-toggle="modal" data-target=".bd-example-modal-xl" class="btn btn-success mr-2">Actualizar</button>
               <button type="button" id="borrar" onClick="borra('.$id.');" class="btn btn-danger">Borrar</button>
-            </div>   
+            </div>
             
-         </div>
+         </div><br><br><br><br><br><br>   
                       ';
                       $i++;
     }
@@ -249,7 +248,60 @@ if($consulta_sql->num_rows>=1){
 }
 ?>
 <script src="js/convivencia.js"></script> 
+<script>
 
+    document.addEventListener("DOMContentLoaded",()=>{
+        let form = document.getElementById("form_subir");
+        form.addEventListener("submit",function(event){
+            event.preventDefault();
+            subir_archivos(this);
+        });
+    });
+
+
+
+        function subir_archivos(form){
+            let barra_estado = form.children[1].children[0],
+                span = barra_estado.children[0],
+                boton_cancelar= form.children[2].children[1];
+
+            barra_estado.classList.remove('barra_verde','barra_roja');
+            //peticion
+
+            let peticion = new XMLHttpRequest();
+
+            peticion.upload.addEventListener("progress",(event)=>{
+                let porcentaje = Math.round((event.loaded / event.total)*100);
+                console.log(porcentaje);
+                barra_estado.style.width =porcentaje+'%';
+                span.innerHTML = porcentaje+'%';
+            });
+            //finalizaod
+
+            peticion.addEventListener("load",()=>{
+                barra_estado.classList.add('barra_verde');
+                span.innerHTML = "Proceso Completado";
+            });
+            
+            //enviar datos
+
+            peticion.open('post','subida.php');
+            peticion.send(new FormData(form));
+
+            //cancelar
+
+            boton_cancelar.addEventListener("click",()=>{
+                peticion.abort();
+                barra_estado.classList.remove('barra_verde');
+                barra_estado.classList.add('barra_roja');
+                span.innerHTML = "Proceso Cancelado";
+
+            });
+
+        }
+
+
+</script>
 </div>
 
 </body>
