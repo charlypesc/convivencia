@@ -17,7 +17,7 @@ $procedimiento      =$_POST['procedimiento'];
 $registro           =$_POST['content'];
 $acuerdo            =$_POST['content_acuerdo'];
 $update_id          =$_POST['actualizaId'];
-    
+print_r($proceso);    
 $db_insertar_ant = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 $db_insertar_ant->set_charset('utf8');
     
@@ -52,45 +52,59 @@ switch($proceso){
             $procedimiento      = $key['procedimiento'];
             $registro           = $key['registro'];
             $cargo              = $key['cargo'];
-            
-            echo '
-         <div class="container mt-3 border rounded">
-         <p><i class="fas fa-file-invoice"></i>'.$i.'</p>
-            <div class="mt-2">
-              <input type="hidden" id="id'.$id.'" value="'.$id.'">
-              <input type="hidden" id="cargo'.$id.'" value="'.$cargo.'">
+            $date='2020';
+        // print_r($year);
+        echo '
+        
+        <br><br><div class="container p-4 mt-3 border rounded ">
+            <div class="row">
+              
+              <div class="col-8  border d-flex">
+                <p>Antecedente:</p>
+                <p class="ml-1" id="procedimiento'.$id.'">'.$procedimiento.'</p>
+              </div>
+              <div class="col-4 border">
+                <p class="ml-1"> Folio: '.$rut.''.$date.'-'.$id.'</p>
+              </div>
             </div>
-            <div class="d-flex">
+            <div class="row mb-1">
+              <div class= "d-flex col-4 border ">
+                <p class="" id="fecha'.$id.'">'.$fecha_antecedente.'</p>
+                <input type="hidden" id="id'.$id.'" value="'.$id.'">
+                <input type="hidden" id="cargo'.$id.'" value="'.$cargo.'">
+              </div>
+              <div class="col-4 border  d-flex">
                 <p>Interviene :</p>
                 <p class="ml-1"id=interviene'.$id.'>'.$interviene.'</p>
-            </div>
-            <div class="d-flex">
+              </div>
+              <div class="col-4  border d-flex">
                 <p>Estudiante :</p>
                 <p class="ml-1">'.$nombres.' '.$apellidos.'</p>
+              </div>
             </div>
-            <div class="d-flex">
-                <p>Fecha:</p>
-                <p class="ml-1" id="fecha'.$id.'">'.$fecha_antecedente.'</p>
+            <div class="row">
+              
             </div>
-            <div class="d-flex">
-                <p>Procedimiento:</p>
-                <p class="ml-1" id="procedimiento'.$id.'">'.$procedimiento.'</p>
+            <div class="row">
+              <h6 class="mt-2 mb-2">Registro de Antecedentes:</h6>
+              <div id="registro'.$id.'" class="col-12 d-flex flex-column  mt-3 mb-3 pt-2 ">'.$registro.'</div>
             </div>
-            <div class="d-flex">
-                <p  class="mr-1">Registro:<br></p>
-                <p id="registro'.$id.'">'.$registro.'</p>
+            <div class="row">
+              <h6 class="mt-2 mb-2">Acuerdos:</h6>
+              <div id="acuerdo'.$id.'" class="col-12 d-flex flex-column border  rounded mt-3 mb-3 pt-2 ">'.$acuerdo.'</div>
             </div>
-            <div class="mb-3">
-              <button type="button" id="actualiza" onclick="actualiza('.$id.');"  data-toggle="modal" data-target=".bd-example-modal-xl" class="btn btn-success">Actualizar</button>
-              <button type="button" id="borrar" onClick="borra('.$id.');" class="btn btn-danger">Borrar</button>
-              </div>   
             
-         </div>
+            <div class="row mb-3">
+              <button type="button" id="actualiza" onclick="actualiza('.$id.');"  data-toggle="modal" data-target=".bd-example-modal-xl" class="btn btn-success mr-2">Actualizar</button>
+              <button type="button" id="borrar" onClick="borra('.$id.');" class="btn btn-danger">Borrar</button>
+            </div>
+            
+         </div><br><br><br><br><br><br>   
                       ';
                       $i++;
-        }
-    }else{
-        echo 'No hay registros de este rut.';
     }
+}else{
+    echo 'No hay registros de este rut.';
+}
     
 ?>
