@@ -58,7 +58,7 @@ function registra(){
                 $('.modal-backdrop').removeClass('modal-backdrop');
                 $('body').removeClass('modal-open');
                 $("#mostrar_antecedentes").html(datosFicha);
-                location.reload();
+                // location.reload();
             }
   
           })
@@ -97,6 +97,7 @@ function actualiza(id){
         document.getElementById("select_option").value=cargo;
         document.getElementById("btn-modal").innerText=("Actualizar");
         document.getElementById("proceso").value=proceso;
+        // console.log(proceso);
         document.getElementById("actualizaId").value=id;
          //paso de datos al editor registro
         ClassicEditor
@@ -142,7 +143,7 @@ function actualiza(id){
                       $('.modal-backdrop').removeClass('modal-backdrop');
                       $('body').removeClass('modal-open');
                       $("#mostrar_antecedentes").html(datosFicha);
-                      location.reload();
+                      // location.reload();
                   }
         
                 })
@@ -180,7 +181,7 @@ function borra(id){
           $('.modal-backdrop').removeClass('modal-backdrop');
           $('body').removeClass('modal-open');
           $("#mostrar_antecedentes").html(datosFicha);
-          location.reload();
+          // location.reload();
           // return false;
         
       }
